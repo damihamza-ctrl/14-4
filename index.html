@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lina — Jawharat Al-Waseel Resort | April 14, 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --off-white: #FAF9F6;
+            --beige: #D4C5B5;
+            --sage-green: #8B9D77;
+            --flesh: #E8C4A2;
+            --forest: #4A5D23;
+            --charcoal: #2C2C2C;
+            --warm-gray: #6B6B6B;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--off-white);
+            color: var(--charcoal);
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+        
+        .serif { 
+            font-family: 'Playfair Display', serif; 
+            font-weight: 400;
+        }
+        
+        /* Smooth scroll */
+        html { scroll-behavior: smooth; }
+        
+        /* Logo - Minimal */
+        .logo-minimal {
+            position: fixed;
+            top: 40px;
+            left: 40px;
+            z-index: 1000;
+            height: 40px;
+            width: auto;
+            filter: brightness(0);
+            opacity: 0.85;
+            transition: all 0.4s ease;
+        }
+        
+        .logo-minimal.light {
+            filter: brightness(0) invert(1);
+            opacity: 0.9;
+        }
+        
+        @media (max-width: 768px) {
+            .logo-minimal { height: 32px; top: 24px; left: 24px; }
+        }
+
+        /* Side Navigation */
+        .side-nav {
+            position: fixed;
+            left: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        
+        .side-nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            opacity: 0.4;
+            transition: all 0.3s ease;
+        }
+        
+        .side-nav-item:hover, .side-nav-item.active {
+            opacity: 1;
+        }
+        
+        .side-nav-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--sage-green);
+            transition: all 0.3s ease;
+        }
+        
+        .side-nav-item.active .side-nav-dot {
+            transform: scale(1.8);
+            background: var(--flesh);
+        }
+        
+        .side-nav-label {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--charcoal);
+            font-weight: 500;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+        
+        .side-nav-item:hover .side-nav-label,
+        .side-nav-item.active .side-nav-label {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        @media (max-width: 1024px) {
+            .side-nav { display: none; }
+        }
+
+        /* Hero - Asymmetric Split */
+        .hero-asymmetric {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr;
+            position: relative;
+        }
+        
+        @media (min-width: 1024px) {
+            .hero-asymmetric { grid-template-columns: 55% 45%; }
+        }
+
+        .hero-text-panel {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px 60px;
+            background: linear-gradient(135deg, var(--off-white) 0%, var(--beige) 100%);
+            position: relative;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-text-panel { padding: 100px 30px 60px; }
+        }
+
+        .hero-text-panel::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 20%;
+            width: 1px;
+            height: 60%;
+            background: linear-gradient(to bottom, transparent, var(--sage-green), transparent);
+            opacity: 0.3;
+        }
+
+        .venue-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--sage-green);
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 32px;
+            font-weight: 500;
+        }
+        
+        .venue-tag::before {
+            content: '';
+            width: 30px;
+            height: 1px;
+            background: var(--sage-green);
+        }
+
+        h1 {
+            font-size: clamp(48px, 6vw, 80px);
+            font-weight: 400;
+            line-height: 0.95;
+            margin-bottom: 8px;
+            color: var(--charcoal);
+            letter-spacing: -2px;
+        }
+
+        .bride-name {
+            font-size: clamp(40px, 5vw, 72px);
+            color: var(--forest);
+            font-style: italic;
+            display: block;
+            margin-bottom: 24px;
+            font-weight: 400;
+        }
+
+        .wedding-date-large {
+            font-size: 14px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--warm-gray);
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        .hero-description {
+            font-size: 15px;
+            color: var(--warm-gray);
+            max-width: 400px;
+            line-height: 1.8;
+            margin-bottom: 48px;
+        }
+
+        .designer-line {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .designer-line::before {
+            content: '';
+            width: 40px;
+            height: 1px;
+            background: var(--flesh);
+        }
+        
+        .designer-line p {
+            font-size: 12px;
+            color: var(--warm-gray);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        .designer-line p span {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            text-transform: none;
+            letter-spacing: 0;
+            font-size: 16px;
+            color: var(--charcoal);
+        }
+
+        .hero-image-panel {
+            position: relative;
+            min-height: 60vh;
+            overflow: hidden;
+        }
+        
+        @media (min-width: 1024px) {
+            .hero-image-panel { min-height: 100vh; }
+        }
+
+        .hero-image-panel img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            inset: 0;
+        }
+
+        .floating-date {
+            position: absolute;
+            bottom: 60px;
+            left: -60px;
+            background: white;
+            padding: 24px 32px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            z-index: 10;
+            text-align: center;
+            border-left: 3px solid var(--flesh);
+        }
+        
+        @media (max-width: 1024px) {
+            .floating-date {
+                bottom: 30px;
+                left: 30px;
+                right: 30px;
+            }
+        }
+        
+        .floating-date-label {
+            font-size: 9px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--warm-gray);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .floating-date-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            color: var(--forest);
+            font-weight: 400;
+            line-height: 1;
+        }
+        
+        .floating-date-month {
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--sage-green);
+            margin-top: 4px;
+        }
+
+        /* Color Palette Section - Horizontal */
+        .palette-section {
+            padding: 120px 60px;
+            background: var(--off-white);
+        }
+        
+        @media (max-width: 768px) {
+            .palette-section { padding: 80px 30px; }
+        }
+
+        .palette-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .palette-title {
+            font-size: 11px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--sage-green);
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+
+        .palette-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(28px, 3vw, 40px);
+            color: var(--charcoal);
+            font-weight: 400;
+        }
+
+        .palette-horizontal {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            max-width: 1000px;
+            margin: 0 auto;
+            height: 400px;
+            gap: 2px;
+        }
+
+        .palette-block {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 30px;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .palette-block:hover {
+            flex: 1.5;
+        }
+
+        .palette-block-bg {
+            position: absolute;
+            inset: 0;
+            opacity: 0.9;
+            transition: opacity 0.3s ease;
+        }
+        
+        .palette-block:hover .palette-block-bg {
+            opacity: 1;
+        }
+
+        .palette-info {
+            position: relative;
+            z-index: 2;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+        }
+
+        .palette-block:hover .palette-info {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .palette-name {
+            font-size: 12px;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .palette-hex {
+            font-family: 'SF Mono', monospace;
+            font-size: 13px;
+            color: rgba(255,255,255,0.9);
+            letter-spacing: 1px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        /* Gallery - Staggered Grid */
+        .gallery-staggered {
+            padding: 0;
+            max-width: 100%;
+        }
+
+        .staggered-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4px;
+        }
+
+        @media (min-width: 768px) {
+            .staggered-grid { 
+                grid-template-columns: repeat(2, 1fr);
+                gap: 4px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .staggered-grid { 
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .staggered-item {
+            position: relative;
+            overflow: hidden;
+            background: var(--beige);
+        }
+
+        .staggered-item:nth-child(1) { aspect-ratio: 3/4; }
+        .staggered-item:nth-child(2) { aspect-ratio: 4/3; }
+        .staggered-item:nth-child(3) { aspect-ratio: 1/1; }
+        .staggered-item:nth-child(4) { aspect-ratio: 16/9; }
+        .staggered-item:nth-child(5) { aspect-ratio: 3/4; }
+        .staggered-item:nth-child(6) { aspect-ratio: 4/5; }
+        .staggered-item:nth-child(7) { aspect-ratio: 16/9; }
+        .staggered-item:nth-child(8) { aspect-ratio: 3/4; }
+        .staggered-item:nth-child(9) { aspect-ratio: 4/3; }
+        .staggered-item:nth-child(10) { aspect-ratio: 1/1; }
+        .staggered-item:nth-child(11) { aspect-ratio: 3/4; }
+        .staggered-item:nth-child(12) { aspect-ratio: 16/9; }
+
+        @media (min-width: 768px) {
+            .staggered-item:nth-child(4) { grid-column: span 2; }
+            .staggered-item:nth-child(7) { grid-column: span 2; }
+            .staggered-item:nth-child(12) { grid-column: span 2; }
+        }
+
+        .staggered-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .staggered-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .staggered-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, rgba(139,157,119,0.9) 0%, transparent 70%);
+            opacity: 0;
+            transition: all 0.5s ease;
+            display: flex;
+            align-items: flex-end;
+            padding: 30px;
+        }
+
+        .staggered-item:hover .staggered-overlay {
+            opacity: 1;
+        }
+
+        .staggered-caption {
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-style: italic;
+            transform: translateY(20px);
+            transition: transform 0.5s ease;
+        }
+
+        .staggered-item:hover .staggered-caption {
+            transform: translateY(0);
+        }
+
+        /* Venue Info Strip */
+        .venue-strip {
+            padding: 80px 60px;
+            background: linear-gradient(to right, var(--sage-green), var(--forest));
+            text-align: center;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .venue-strip { padding: 60px 30px; }
+        }
+
+        .venue-icon {
+            width: 60px;
+            height: 60px;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 24px;
+        }
+
+        .venue-name {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(24px, 3vw, 36px);
+            margin-bottom: 12px;
+            font-weight: 400;
+        }
+
+        .venue-location {
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+
+        /* Footer - Minimal */
+        .footer-minimal {
+            padding: 100px 60px;
+            background: var(--off-white);
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .footer-minimal { padding: 80px 30px; }
+        }
+
+        .footer-divider {
+            width: 60px;
+            height: 1px;
+            background: var(--flesh);
+            margin: 0 auto 40px;
+        }
+
+        .footer-names {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(32px, 4vw, 48px);
+            color: var(--charcoal);
+            margin-bottom: 16px;
+            font-weight: 400;
+        }
+
+        .footer-date {
+            font-size: 13px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--sage-green);
+            margin-bottom: 48px;
+            font-weight: 500;
+        }
+
+        .footer-credit {
+            font-size: 11px;
+            color: var(--warm-gray);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        .footer-credit span {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            text-transform: none;
+            letter-spacing: 0;
+            color: var(--charcoal);
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--sage-green);
+            color: white;
+            padding: 16px 32px;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0;
+            transition: all 0.4s ease;
+            z-index: 1000;
+            border-left: 3px solid var(--flesh);
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* Reveal animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Minimal Logo -->
+    <img src="https://i.imgur.com/uJqy10F.jpeg" alt="Logo" class="logo-minimal" id="mainLogo">
+
+    <!-- Side Navigation -->
+    <div class="side-nav">
+        <div class="side-nav-item active" onclick="scrollToSection(0)">
+            <div class="side-nav-dot"></div>
+            <span class="side-nav-label">Intro</span>
+        </div>
+        <div class="side-nav-item" onclick="scrollToSection(1)">
+            <div class="side-nav-dot"></div>
+            <span class="side-nav-label">Palette</span>
+        </div>
+        <div class="side-nav-item" onclick="scrollToSection(2)">
+            <div class="side-nav-dot"></div>
+            <span class="side-nav-label">Gallery</span>
+        </div>
+        <div class="side-nav-item" onclick="scrollToSection(3)">
+            <div class="side-nav-dot"></div>
+            <span class="side-nav-label">Venue</span>
+        </div>
+    </div>
+
+    <!-- HERO - Asymmetric Split -->
+    <section class="hero-asymmetric" id="section-0">
+        <div class="hero-text-panel">
+            <div class="venue-tag reveal">Jawharat Al-Waseel Resort</div>
+            
+            <h1 class="reveal" style="transition-delay: 0.1s;">
+                <span class="bride-name serif">Lina</span>
+            </h1>
+            
+            <p class="wedding-date-large reveal" style="transition-delay: 0.2s;">April 14, 2026</p>
+            
+            <p class="hero-description reveal" style="transition-delay: 0.3s;">
+                A celebration of natural beauty and timeless elegance, set against the serene backdrop of one of the most enchanting resorts.
+            </p>
+            
+            <div class="designer-line reveal" style="transition-delay: 0.4s;">
+                <p>Designed by <span>Mohamed Tunis</span></p>
+            </div>
+        </div>
+        
+        <div class="hero-image-panel">
+            <img src="https://i.imgur.com/KCQErJK.jpeg" alt="Lina Wedding at Jawharat Al-Waseel Resort">
+            
+            <div class="floating-date reveal" style="transition-delay: 0.6s;">
+                <div class="floating-date-label">Save the Date</div>
+                <div class="floating-date-number">14</div>
+                <div class="floating-date-month">April 2026</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COLOR PALETTE - Horizontal Blocks -->
+    <section class="palette-section" id="section-1">
+        <div class="palette-header">
+            <p class="palette-title reveal">Color Palette</p>
+            <h2 class="palette-subtitle serif reveal" style="transition-delay: 0.1s;">Natural Harmony</h2>
+        </div>
+
+        <div class="palette-horizontal reveal" style="transition-delay: 0.2s;">
+            <div class="palette-block" onclick="copyColor('#FAF9F6')">
+                <div class="palette-block-bg" style="background: #FAF9F6; border: 1px solid #E8E4D9;"></div>
+                <div class="palette-info">
+                    <p class="palette-name" style="color: var(--charcoal); text-shadow: none;">Off White</p>
+                    <p class="palette-hex" style="color: var(--warm-gray); text-shadow: none;">#FAF9F6</p>
+                </div>
+            </div>
+            
+            <div class="palette-block" onclick="copyColor('#D4C5B5')">
+                <div class="palette-block-bg" style="background: #D4C5B5;"></div>
+                <div class="palette-info">
+                    <p class="palette-name">Beige</p>
+                    <p class="palette-hex">#D4C5B5</p>
+                </div>
+            </div>
+            
+            <div class="palette-block" onclick="copyColor('#8B9D77')">
+                <div class="palette-block-bg" style="background: #8B9D77;"></div>
+                <div class="palette-info">
+                    <p class="palette-name">Sage Green</p>
+                    <p class="palette-hex">#8B9D77</p>
+                </div>
+            </div>
+            
+            <div class="palette-block" onclick="copyColor('#E8C4A2')">
+                <div class="palette-block-bg" style="background: #E8C4A2;"></div>
+                <div class="palette-info">
+                    <p class="palette-name">Flesh</p>
+                    <p class="palette-hex">#E8C4A2</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY - Staggered Grid -->
+    <section class="gallery-staggered" id="section-2">
+        <div class="staggered-grid">
+            <div class="staggered-item reveal">
+                <img src="https://i.imgur.com/KCQErJK.jpeg" alt="Lina Wedding" loading="lazy">
+                <div class="staggered-overlay">
+                    <p class="staggered-caption">The Venue</p>
+                </div>
+            </div>
+            
+            <div class="staggered-item reveal" style="transition-delay: 0.1s;">
+                <img src="https://i.imgur.com/ecFJL0P.jpeg" alt="Wedding Details" loading="lazy">
+                <div class="staggered-overlay">
+                    <p class="staggered-caption">Elegant Details</p>
+                </div>
+            </div>
+            
+            <div class="staggered-item reveal" style="transition-delay: 0.2s;">
+                <img src="https://i.imgur.com/LUPmMwR.jpeg" alt="Floral Arrangements" loading="lazy">
+                <div class="staggered-overlay">
+                    <p class="staggered-caption">Botanical Beauty</p>
+                </div>
+            </div>
+            
+            <div class="staggered-item reveal" style="transition-delay: 0.1s;">
+                <img src="https://i.imgur.com/gvLME3t.jpeg" alt="Resort View" loading="lazy">
+                <div class="staggered-overlay">
+                    <p class="staggered-caption">Jawharat Al-Waseel</p>
+                </div>
+            </div>
+            
+            <div class="staggered-item reveal" style="transition-delay: 0.2s;">
+                <img src="https://i.imgur.com/95JCOJj.jpeg" alt="Wedding Moments" loading="lazy">
+                <div class="staggered-overlay">
+                    <p class="staggered-caption">Golden Moments</p>
+                </div>
+            </div>
+            
+            <div class="staggered-item reveal" style="transition-delay: 0.3s;">
+                <img src="https://i.imgur.com/0M2aEQy.jpeg" alt="Celebration" loading="lazy">
+                <div class="staggered-overlay">
+                    <p class="staggered-caption">Pure Joy</p>
+                </div>
+            </div>
+            
+            <div class="staggered-item reveal" style="transition-delay: 0.1s;">
+                <img src="https://i.imgur.com/rTirnKy.jpeg" alt="Wedding Scene" loading="lazy">
+                <div class="staggered-overlay">
+                    <p class="staggered-caption">The Celebration</p>
+                </div>
+            </div>
+            
+            <div class="staggered-item reveal" style="transition-delay: 0.2s;">
+                <img src="https://i.imgur.com/a2VndDH.jpeg" alt="Intimate Moments" loading="lazy">
+                <div class="staggered-overlay">
+                    <p class="staggered-caption">Intimacy</p>
+                </div>
+            </div>
+            
+            <div class="staggered-item reveal" style="transition-delay: 0.3s;">
+                <img src="https://i.imgur.com/S851aNm.jpeg" alt="Wedding Light" loading="lazy">
+                <div class="staggered-overlay">
+                    <p class="staggered-caption">Soft Light</p>
+                </div>
+            </div>
+            
+            <div class="staggered-item reveal" style="transition-delay: 0.1s;">
+                <img src="https://i.imgur.com/U0s3D4T.jpeg" alt="Wedding Romance" loading="lazy">
+                <div class="staggered-overlay">
+                    <p class="staggered-caption">Romance</p>
+                </div>
+            </div>
+            
+            <div class="staggered-item reveal" style="transition-delay: 0.2s;">
+                <img src="https://i.imgur.com/bbnM7tb.jpeg" alt="Wedding Dreams" loading="lazy">
+                <div class="staggered-overlay">
+                    <p class="staggered-caption">Dreams</p>
+                </div>
+            </div>
+            
+            <div class="staggered-item reveal" style="transition-delay: 0.3s;">
+                <img src="https://i.imgur.com/L9VtkCX.jpeg" alt="Wedding Forever" loading="lazy">
+                <div class="staggered-overlay">
+                    <p class="staggered-caption">Forever Begins</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VENUE STRIP -->
+    <section class="venue-strip" id="section-3">
+        <div class="reveal">
+            <div class="venue-icon">✦</div>
+            <h3 class="venue-name serif">Jawharat Al-Waseel Resort</h3>
+            <p class="venue-location">A Destination of Natural Beauty & Timeless Elegance</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer-minimal">
+        <div class="footer-divider reveal"></div>
+        <p class="footer-names serif reveal" style="transition-delay: 0.1s;">Lina</p>
+        <p class="footer-date reveal" style="transition-delay: 0.2s;">April 14, 2026</p>
+        <p class="footer-credit reveal" style="transition-delay: 0.3s;">
+            Wedding Design by <span>Mohamed Tunis</span>
+        </p>
+    </footer>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">Color copied to clipboard</div>
+
+    <!-- Scripts -->
+    <script>
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Copy color function
+        function copyColor(hex) {
+            navigator.clipboard.writeText(hex).then(() => {
+                const toast = document.getElementById('toast');
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 2000);
+            });
+        }
+
+        // Navigation
+        const sections = document.querySelectorAll('section');
+        const navItems = document.querySelectorAll('.side-nav-item');
+        const logo = document.getElementById('mainLogo');
+        
+        function scrollToSection(index) {
+            sections[index].scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        window.addEventListener('scroll', () => {
+            let current = 0;
+            sections.forEach((section, index) => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 500) {
+                    current = index;
+                }
+            });
+            
+            navItems.forEach((item, index) => {
+                if (index === current) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+            
+            // Logo color based on section
+            if (current === 0 || current === 2) {
+                logo.classList.add('light');
+            } else {
+                logo.classList.remove('light');
+            }
+        });
+    </script>
+
+</body>
+</html>
